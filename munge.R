@@ -57,23 +57,6 @@ requests$from_robot = sapply(requests$from_user_agent, is_robot)
 requests$from_ip <- as.character(requests$from_ip)
 requests$from_country <- sapply(requests$from_ip, geolocate)
 
-
-# 1. we start on a Thursday, the 20th of June
-# 2. we end on a Saturday, the 24th of August
-# ==> NOTE: difficult to do per-month statistics because
-# the data is incomplete
-# ==> maybe instead, do per day, or per week, or both
-# (and for weeks, start on Monday, end on Sunday!)
-> max(requests$date_time)
-[1] "2013-08-24 04:34:48 UTC"
-> max(requests$human_date_time)
-[1] "2013-08-24 04:34:48 UTC"
-> max(requests$human_date_time)$wday
-[1] 6
-> min(requests$human_date_time)$wday
-[1] 4
-
-
 # pageviews are defined as those requests that are for a 
 # page and that were not made by a robot or crawler
 # (alternative syntax: `requests[requests$for_page & !requests$from_robot, ]`)
