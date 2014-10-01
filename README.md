@@ -1,5 +1,12 @@
 # Analyzing webserver log data (Principles of Statistics, Homework 1, Group 2)
 
+## Contributing
+
+1. Please download and install [Git](http://git-scm.com/downloads), or alternatively use the GUI application [GitHub for Mac](https://mac.github.com/) or [GitHub for Windows](https://windows.github.com/).
+2. Next, create an account on [GitHub](https://github.com/join).
+3. Once registered, tell @stdbrouw to add you to the @mastat organization.
+4. Clone the repository, either in the desktop application you just downloaded or by typing `git clone https://github.com/mastat/group-02-principles-homework-01.git` on the command-line.
+
 ## Getting started
 
 Load `principles-homework-01.Rproj` in RStudio, or just change your working directory to the directory containing this README, then run `source('./install.R')` in an R console to install the necessary packages.
