@@ -45,6 +45,12 @@ For the final analysis we defined succesrate of visiting a page as "succeeded" (
 
 [Also for how we constructed the robots, mobile/desktop columns etc.]
 
+### Mathodological caveats
+
+* User agent always starts with Mozilla -- probably misrecorded?
+* While 5000 observations sounds like a lot, most of these are actually for assets (images, stylesheets and so on) rather than actual page content. Furthermore, because a single visitor usually visits multiple pages, we are actually analyzing perhaps only a couple hundred visitors over a time period of multiple months. The interpretation of any analysis must be seen in this light.
+* For that same reason, we have taken care to specifically identify each request according to whether or not it is a request for a web page. For many kinds of analyses of web traffic, this is a more interesting dataset to work from than the set of all requests regardless of type.
+
 ## Results
 
 The MMA website was visited 5000 times by n= different IP addresses. N= , %, which originated mostly from country y(n=,%) and country x(n=,%) and they were all from the same time zone (200). N, % of the IP addresses was used more than once used to visit the website. Most requests were images (n=, %), only (n=, 10%) of the requests were pages. Of the total requests n= (%) actually succeeded to enter the page.
