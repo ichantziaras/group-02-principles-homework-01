@@ -2,28 +2,38 @@
 
 ## Problem
 
-### 1. Univariate analysis
+### 1. Univariate analysis [TODO: give reasons why we're doing these analyses]
 
-- How many IP-adresses logged in to the data? 
-- From which countries do they origin? 
-- How many IP-adressess logged in more than twice? 
-- What is the average (mean,median) times an individual logged in? 
-- What type of user agent was mostly used (mobile desktop)? 
-- How many visits actually succeeded to enter the page? 
-- What was the number of request for pages? 
-- What was the average (mean/median) Object\_Size in kb?
+- How many unique IP-adresses (locations) made a request? 
+- From which countries do they probably originate?
+- How many IP-adressess accessed the site more than once? 
+- Percentage of direct traffic? ("-" in origin variable) / direct vs. internal vs. referral percentages
+- What is the average (mean,median) times an IP address accessed the site? 
+- What type of device was mostly used (mobile+tablet/desktop)? 
+- How many visits actually succeeded (vs. failure) to enter the page?
+- Which pages resulted in errors (e.g. page not found)?
+- What were the most requested pages?
+- How many requests did the blog get? (Or the percentage...)
+- What was the number of request for pages from humans? 
+- What was the average (mean/median) object_size in kb?
+- How many documents were downloaded (e.g. PDF)?
 
 ### 2. Questions for increase over time
 
 - Did the visits increase over time? More visits in April compared to March etc.?
 - In which months most of the visits are performed? (Should we look within this month?)
 - Are there more visits in the weekend compared to the week? 
-- Which day (Monday, Tuesday etc.)is most attractive for visitors?
-- Are there more visits in the morning, afternoon compared to the evening?
+- Which day (Monday, Tuesday etc.) is most attractive for visitors?
+- Are there more visits in the morning, afternoon compared to the evening?(From the perspective of the server; maybe also perspective of user if we find the time.)
 
-### 3. Choose a variable and see whether it changes over time
+### 3. Choose a variable and see whether it changes over time [TODO: use these to make tentative recommendations]
 
-- Let's choose number of 'succesrate' over time. In which month/day/hour is succes rate highest? Off course it is ok if you have other preference.
+Potential questions: 
+
+- Let's choose number of 'success rate' over time. In which month/day/hour is succes rate highest? [Off course it is ok if you have other preference.]
+- How does country of origin ratios (or totals) evolve over time?
+- Evolution of mobile/desktop traffic over time.
+- Pages/visit over time (pages/ip/day)
 
 ## Methods
 
@@ -33,16 +43,16 @@ For secondary analyses we will create a day variable classified in morning (7:00
 
 For the final analysis we defined succesrate of visiting a page as "succeeded" (yes,no)
 
+[Also for how we constructed the robots, mobile/desktop columns etc.]
+
 ## Results
 
 The MMA website was visited 5000 times by n= different IP addresses. N= , %, which originated mostly from country y(n=,%) and country x(n=,%) and they were all from the same time zone (200). N, % of the IP addresses was used more than once used to visit the website. Most requests were images (n=, %), only (n=, 10%) of the requests were pages. Of the total requests n= (%) actually succeeded to enter the page.
 
 We did (not) see an increase of visits over months (see plot .). Most visits were made in June (n, %). …… etc.
 
-## Conclusion
+## Conclusion and discussion
 
-TODO
+Further research: 
 
-## Discussion
-
-TODO
+- use origin + ip to determine user flows? (landing / exit pages)
