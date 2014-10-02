@@ -16,15 +16,10 @@ max(requests$human_date_time)$wday
 min(requests$human_date_time)$wday
 # 4
 
+# how many client errors (mostly 404s)?
 nrow(subset(requests, status_code_type == 'client error'))
 
-
-requests$is_weekend <- subset(requests, human_date_time$wday == 0 | human_date_time$wday == 6)
-
-requests$human_date_time$wday
-
 unique(subset(requests, for_document)$for_extension)
-
 table(subset(requests, for_document)$for_extension)
 
 View(subset(pageviews, for_blog))
@@ -33,3 +28,17 @@ unique(pageviews$from_ip)
 
 # how many requests from robots?
 nrow(subset(requests, from_robot))
+
+# unique ips per country (informally: visits per country, 
+# as opposed to pages per country)
+counts <- count(pageviews, c('from_country', 'from_ip'))
+uniques <- aggregate(from_ip ~ from_country, counts, length)
+# sanity check
+length(unique(pageviews$from_ip)) == sum(uniques$from_ip)
+
+
+
+# where does our requests peak come from?
+peak <- subset(requests, date == '1aug2014')
+# turns out it's this blog post: 
+# http://www.mma.ugent.be/predictive_analytics/customer_intelligence/Blog/Entries/2013/7/26_Open_Source,_Big_Data_and_more_at_OSCON_in_Portland,_OR.html
