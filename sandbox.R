@@ -24,6 +24,26 @@ table(subset(requests, for_document)$for_extension)
 
 View(subset(pageviews, for_blog))
 
+
+#only for a pageviews only html php no robots
+#2639 unique IP
+#311 for a page
+length(unique(requests$from_ip))
+
+
+length(unique(pageviews$from_ip))
+
+#Unique IP_addresses per country
+#Methodology from the pagevies to unque
+unique  <- pageviews[which(duplicated(pageviews$from_ip)),]
+View(unique)
+id <- which(duplicated(pageviews$from_ip))
+unique  <- pageviews[-id,]
+
+x <- table(unique$from_country)
+tail(sort(x))
+
+
 unique(pageviews$from_ip)
 
 # how many requests from robots?
