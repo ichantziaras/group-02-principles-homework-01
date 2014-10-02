@@ -42,15 +42,33 @@ requests$timezone <- paste('+0', requests$timezone, sep='')
 # merge date, time and timezone and convert into proper
 # datetime objects from characters
 .datetime <- paste(requests$date, requests$time, requests$timezone)
-requests$date_time = dmy_hms(.datetime)
-requests$human_date_time = as.POSIXlt(requests$date_time)
+requests$date_time <- dmy_hms(.datetime)
+requests$human_date_time <- as.POSIXlt(requests$date_time)
 
+# now that we've parsed dates and times, we can sort our requests
+# (stdlib R code: `requests[order(with(requests, date_time)), ]`)
+requests <- arrange(requests, date_time)
+
+# week of the year (1-52)
+requests$week_of_year <- week(requests$date_time)
 # denote if a request was made during the weekend
-requests$is_weekend = requests$human_date_time$wday == 0 | requests$human_date_time$wday == 6
+requests$is_weekend <- requests$human_date_time$wday == 0 | requests$human_date_time$wday == 6
+
+# the first and last weeks do not have data for each day of the week, 
+# making certain kinds of analyses unfair
+# 
+# we won't remove this data, but we'll designate each data point from 
+# these weeks as a "tail" (this has nothing to do with the tails of a 
+# statistical distribution, of course)
+.counts <- count(requests, c('week_of_year', 'human_date_time$wday'))
+days_measured_per_week <- aggregate(human_date_time.wday ~ week_of_year, .counts, length)
+days_measured_per_week <- rename(days_measured_per_week, list('human_date_time.wday' = 'days_measured'))
+incomplete_weeks <- subset(days_measured_per_week, days_measured < 7)$week_of_year
+requests$is_tail <- requests$week_of_year %in% incomplete_weeks
 
 # categorize status codes by type (success, redirect, client error etc.)
-.status_code_types = substr(as.character(requests$status_code), 0, 1)
-requests$status_code_type = factor(.status_code_types, 
+.status_code_types <- substr(as.character(requests$status_code), 0, 1)
+requests$status_code_type <- factor(.status_code_types, 
   levels=names(STATUS_CODE_TYPES), labels=STATUS_CODE_TYPES)
 
 # extract file path from requested url, getting rid of querystring arguments etc.
@@ -65,10 +83,10 @@ requests$for_blog <- grepl('/Blog', requests$for_path)
 requests$from_mobile <- grepl('mobile', requests$from_user_agent, ignore.case = TRUE)
 
 # figure out whether the request was made from a known crawler or bot
-requests$from_robot = sapply(requests$from_user_agent, is_robot)
+requests$from_robot <- sapply(requests$from_user_agent, is_robot)
 
 # what was the previous page that was visited (categorized origin)?
-requests$referral_type = as.factor(sapply(requests$origin, categorize_referrer))
+requests$referral_type <- as.factor(sapply(requests$origin, categorize_referrer))
 
 # pageviews are defined as those requests that are for a 
 # page and that were not made by a robot or crawler
