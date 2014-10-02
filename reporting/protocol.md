@@ -50,6 +50,7 @@ For the final analysis we defined succesrate of visiting a page as "succeeded" (
 * User agent always starts with Mozilla -- probably misrecorded?
 * While 5000 observations sounds like a lot, most of these are actually for assets (images, stylesheets and so on) rather than actual page content. Furthermore, because a single visitor usually visits multiple pages, we are actually analyzing perhaps only a couple hundred visitors over a time period of multiple months. The interpretation of any analysis must be seen in this light.
 * For that same reason, we have taken care to specifically identify each request according to whether or not it is a request for a web page. For many kinds of analyses of web traffic, this is a more interesting dataset to work from than the set of all requests regardless of type.
+* To identify the origin of a request, we've used the [MaxMinds GeoIP Lite](http://dev.maxmind.com/geoip/legacy/geolite/) database. MaxMinds claims a 14% error rate for city-level identification. Country-level identification (which we use) is likely to be more accurate than that. However, it is necessary to keep into account that geolocation using an IP address is never a hundred percent accurate.
 
 ## Results
 

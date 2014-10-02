@@ -7,14 +7,14 @@ load('munged/pageviews.RData')
 # the data is incomplete
 # ==> maybe instead, do per day, or per week, or both
 # (and for weeks, start on Monday, end on Sunday!)
-> max(requests$date_time)
-[1] "2013-08-24 04:34:48 UTC"
-> max(requests$human_date_time)
-[1] "2013-08-24 04:34:48 UTC"
-> max(requests$human_date_time)$wday
-[1] 6
-> min(requests$human_date_time)$wday
-[1] 4
+max(requests$date_time)
+# "2013-08-24 04:34:48 UTC"
+max(requests$human_date_time)
+# "2013-08-24 04:34:48 UTC"
+max(requests$human_date_time)$wday
+# 6
+min(requests$human_date_time)$wday
+# 4
 
 nrow(subset(requests, status_code_type == 'client error'))
 
@@ -29,7 +29,7 @@ table(subset(requests, for_document)$for_extension)
 
 View(subset(pageviews, for_blog))
 
-5000
+
 #only for a pageviews only html php no robots
 #2639 unique IP
 #311 for a page
@@ -47,4 +47,10 @@ unique  <- pageviews[-id,]
 
 x <- table(unique$from_country)
 tail(sort(x))
+
+
+unique(pageviews$from_ip)
+
+# how many requests from robots?
+nrow(subset(requests, from_robot))
 
