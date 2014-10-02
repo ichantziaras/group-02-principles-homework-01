@@ -20,6 +20,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 # History files
+.Rapp.history
 .Rhistory
 
 # Example code in package build process
@@ -28,8 +29,8 @@ Temporary Items
 # R data files from past sessions
 .Rdata
 
-# RStudio files
-.Rproj.user/
-
 # A sandbox for toying around with code
 sandbox.R
+
+# RStudio files
+.Rproj.user/
