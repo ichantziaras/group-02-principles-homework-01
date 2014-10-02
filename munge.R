@@ -67,6 +67,9 @@ requests$from_mobile <- grepl('mobile', requests$from_user_agent, ignore.case = 
 # figure out whether the request was made from a known crawler or bot
 requests$from_robot = sapply(requests$from_user_agent, is_robot)
 
+# what was the previous page that was visited (categorized origin)?
+requests$referral_type = as.factor(sapply(requests$origin, categorize_referrer))
+
 # pageviews are defined as those requests that are for a 
 # page and that were not made by a robot or crawler
 # (alternative syntax: `requests[requests$for_page & !requests$from_robot, ]`)

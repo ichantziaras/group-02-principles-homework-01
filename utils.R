@@ -32,3 +32,20 @@ is_robot <- function(user_agent) {
   matches <- sapply(KNOWN_ROBOTS, function(robot) grepl(robot, user_agent))
   return(any(matches))
 }
+
+categorize_referrer <- function (referrer) {
+  if (grepl('^-$', referrer)) {
+    'direct'
+  } else if (grepl('mma\\.ugent\\.be', referrer)) {
+    'internal'
+  } else if (grepl('ugent\\.be', referrer)) {
+    # different subdomain, same domain
+    'local'
+  } else if (grepl('plus\\.google|facebook|twitter', referrer)) {
+    'social'
+  } else if (grepl('google|yahoo|bing', referrer)) {
+    'search'
+  } else {
+    'external'
+  }
+}
