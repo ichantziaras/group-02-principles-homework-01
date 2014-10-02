@@ -45,6 +45,9 @@ requests$timezone <- paste('+0', requests$timezone, sep='')
 requests$date_time = dmy_hms(.datetime)
 requests$human_date_time = as.POSIXlt(requests$date_time)
 
+# denote if a request was made during the weekend
+requests$is_weekend = requests$human_date_time$wday == 0 | requests$human_date_time$wday == 6
+
 # categorize status codes by type (success, redirect, client error etc.)
 .status_code_types = substr(as.character(requests$status_code), 0, 1)
 requests$status_code_type = factor(.status_code_types, 
