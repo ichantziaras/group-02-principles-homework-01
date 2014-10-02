@@ -54,8 +54,8 @@ requests$status_code_type = factor(.status_code_types,
 requests$for_path <- sapply(requests$for_uri, function (uri) parse_url(uri)$path)
 # categorize requests by type
 requests$for_extension <- as.factor(file_ext(requests$for_path))
-requests$for_page <- ifelse(requests$for_extension %in% PAGE_EXTENSIONS, TRUE, FALSE)
-requests$for_document <- ifelse(requests$for_extension %in% DOCUMENT_EXTENSIONS, TRUE, FALSE)
+requests$for_page <- requests$for_extension %in% PAGE_EXTENSIONS
+requests$for_document <- requests$for_extension %in% DOCUMENT_EXTENSIONS
 requests$for_blog <- grepl('/Blog', requests$for_path)
 
 # figure out mobile traffic from user agent
