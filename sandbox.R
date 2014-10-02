@@ -51,12 +51,10 @@ nrow(subset(requests, from_robot))
 
 # unique ips per country (informally: visits per country, 
 # as opposed to pages per country)
-counts <- count(pageviews, c('from_country', 'from_ip'))
-uniques <- aggregate(from_ip ~ from_country, counts, length)
+.counts <- count(pageviews, c('from_country', 'from_ip'))
+uniques <- aggregate(from_ip ~ from_country, .counts, length)
 # sanity check
 length(unique(pageviews$from_ip)) == sum(uniques$from_ip)
-
-
 
 # where does our requests peak come from?
 peak <- subset(requests, date == '1aug2014')
