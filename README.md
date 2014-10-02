@@ -29,18 +29,27 @@ Column name      | Type             | Description
 timezone         | character vector | the timezone in ISO format (+0200 for every data point)
 status_code      | integer          | the HTTP status code
 status_code_type | factor           | the type of status code (success, client error, redirect etc.)
+object_size      | integer          | object size in bytes, untouched
+origin           | character vector | the page from which our user was referred
+referral_type    | factor           | whether the referral counts as internal, external, search, social and so on
+date             | character vector | the original date, untouched
+time             | character vector | the original time, untouched
 date_time        | POSIXct          | the date and time as a UNIX timestamp (parsed from date, time and timezone)
 human_date_time  | POSIXlt          | the date and time as an R list
+week_of_year     | integer          | the week of the year, 1-52
+is_weekend       | logical          | whether the day of the request is a Saturday or a Sunday
+is_tail          | logical          | whether the request was made in the first or last week of our sample
 for_uri          | character vector | the uniform resource identifier (the requested path)
 for_path         | character vector | the path to the requested uri (without ?qs or #anchors)
 for_extension    | character vector | the file extension, without leading dot, e.g. jpg, gif
 for_page         | logical          | whether the request is for a page (html or php)
 for_document     | logical          | whether the request is for a document (doc, xls etc.)
 for_blog         | logical          | whether the request is for a page on the blog
+from_user_agent  | character vector | the browser or other tool that issued the request
 from_ip          | character vector | the IP address in dotted decimal notation, e.g. 192.168.2.1
-from_country     | factor           | the country from which the request originates, found by cross-referencing with a GeoIP database
+from_country     | factor           | the country from which the request originates, found by using a GeoIP database
 from_robot       | logical          | whether the request was made by a crawler
-from_mobile      | logical          | whether the traffic originates from a mobile browser, found by analyzing user_agent information
+from_mobile      | logical          | whether the traffic originates from a mobile browser, extracted from from_user_agent
 
 For ease of analysis, we have chosen not to normalize the data, that is, to retain everything in a single table and not split the data into separate tables that describe requests, pages and users. However, we have tried to make the distinction between these different kinds of variables clear with the following naming scheme: 
 
@@ -48,4 +57,5 @@ prefix | meaning
 -------|---------
 for_   | page data, derived from uri
 from_  | user data, derived from ip and user_agent
+is_    | logical data (unless for_ or from_)
 *      | request data
